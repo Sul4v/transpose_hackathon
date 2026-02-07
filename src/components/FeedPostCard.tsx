@@ -237,52 +237,17 @@ export function FeedPostCard({
 
             {/* Actions row (shown in feed and details) */}
             <View style={[styles.actionsContainer, detailsMode && styles.actionsContainerDetails]}>
-                <View style={styles.leftActions}>
-                    {/* Upvote button */}
-                    <TouchableOpacity
-                        style={styles.actionButton}
-                        onPress={(event) => {
-                            event.stopPropagation();
-                            onUpvote?.(post.id);
-                        }}
-                        activeOpacity={0.7}
-                    >
-                        <Ionicons
-                            name={isUpvoted ? 'arrow-up-circle' : 'arrow-up-circle-outline'}
-                            size={26}
-                            color={colors.textPrimary}
-                        />
-                    </TouchableOpacity>
-                    {/* Downvote button */}
-                    <TouchableOpacity
-                        style={styles.actionButton}
-                        onPress={(event) => {
-                            event.stopPropagation();
-                            onDownvote?.(post.id);
-                        }}
-                        activeOpacity={0.7}
-                    >
-                        <Ionicons
-                            name={isDownvoted ? 'arrow-down-circle' : 'arrow-down-circle-outline'}
-                            size={26}
-                            color={colors.textPrimary}
-                        />
-                    </TouchableOpacity>
-                </View>
-
-                <View style={styles.rightActions}>
-                    <TouchableOpacity
-                        style={styles.actionButton}
-                        onPress={(event) => handleSave(event)}
-                        activeOpacity={0.7}
-                    >
-                        <Ionicons
-                            name={post.isSaved ? 'bookmark' : 'bookmark-outline'}
-                            size={22}
-                            color={colors.textPrimary}
-                        />
-                    </TouchableOpacity>
-                </View>
+                <TouchableOpacity
+                    style={styles.contactButton}
+                    onPress={(event) => {
+                        event.stopPropagation();
+                        // TODO: Implement contact functionality
+                    }}
+                    activeOpacity={0.7}
+                >
+                    <Ionicons name="mail-outline" size={18} color={colors.textPrimary} />
+                    <Text style={styles.contactButtonText}>Contact</Text>
+                </TouchableOpacity>
             </View>
 
             {/* Caption (Only for Image Posts - rendered BELOW actions) */}
@@ -414,17 +379,20 @@ const styles = StyleSheet.create({
         paddingTop: 14,
         paddingBottom: 12,
     },
-    leftActions: {
+    contactButton: {
         flexDirection: 'row',
         alignItems: 'center',
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: colors.textSecondary,
+        gap: 6,
     },
-    rightActions: {
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    actionButton: {
-        padding: 4,
-        marginRight: 6,
+    contactButtonText: {
+        fontSize: 14,
+        fontWeight: '600',
+        color: colors.textPrimary,
     },
     captionContainer: {
         marginBottom: 8,
