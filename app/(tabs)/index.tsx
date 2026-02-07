@@ -5,26 +5,79 @@ import { FeedPostCard, FeedPostData } from '../../src/components';
 import { OnboardingModal } from '../../src/components/OnboardingModal';
 import { colors } from '../../src/styles/colors';
 
-// Hardcoded event post from the Crustdata API response
-const HACKATHON_POST: FeedPostData = {
-    id: '1',
-    type: 'image',
-    images: ['https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800'],
-    topic: 'Hackathon',
-    caption: `🚨 Abu Dhabi, hackathon tomorrow night! 🇦🇪⚡️
+// Mock event posts for the feed
+const MOCK_POSTS: FeedPostData[] = [
+    {
+        id: '1',
+        type: 'image',
+        images: ['https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800'],
+        topic: 'Hackathon',
+        caption: `🚨 Abu Dhabi, hackathon tomorrow night! 🇦🇪⚡️
 
 We're hosting our next c0mpiled hackathon, a few high-intensity hours building agentic solutions around real problems in the region!
 
 📅 Feb 7  •  📍Yas Marina Circuit
 
 YC judges from Crustdata, Trace, Uplift AI and more. Open to builders!`,
-    votes: 48,
-    userVote: 0,
-    isSaved: false,
-    date: 'Feb 6, 2026',
-};
+        votes: 48,
+        userVote: 0,
+        isSaved: false,
+        date: 'Feb 6, 2026',
+    },
+    {
+        id: '2',
+        type: 'image',
+        images: ['https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=800'],
+        topic: 'AI Summit',
+        caption: `🤖 Dubai AI Summit 2026 - Final speaker lineup announced!
 
-const FEED_DATA: FeedPostData[] = [HACKATHON_POST];
+Join 500+ AI leaders for two days of talks, demos, and networking. Featuring speakers from OpenAI, Anthropic, and Google DeepMind.
+
+📅 Feb 15-16  •  📍Museum of the Future
+
+Early bird tickets still available!`,
+        votes: 124,
+        userVote: 0,
+        isSaved: false,
+        date: 'Feb 15, 2026',
+    },
+    {
+        id: '3',
+        type: 'image',
+        images: ['https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800'],
+        topic: 'Startup Pitch',
+        caption: `💰 Pitch Night Abu Dhabi - $50K in prizes!
+
+10 startups. 3 minutes each. Winner takes $50K.
+
+Looking for judges and mentors from the VC community. DM if interested!
+
+📅 Feb 20  •  📍Hub71`,
+        votes: 67,
+        userVote: 0,
+        isSaved: false,
+        date: 'Feb 14, 2026',
+    },
+    {
+        id: '4',
+        type: 'image',
+        images: ['https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800'],
+        topic: 'Tech Meetup',
+        caption: `☕ Founders Coffee - Weekly meetup for builders
+
+Every Thursday morning, we gather to share what we're working on, get feedback, and connect with other founders in the UAE.
+
+No pitch decks. Just real conversations.
+
+📅 Every Thursday  •  📍DIFC`,
+        votes: 89,
+        userVote: 0,
+        isSaved: false,
+        date: 'Feb 23, 2026',
+    },
+];
+
+const FEED_DATA: FeedPostData[] = MOCK_POSTS;
 
 export default function HomeScreen() {
     const router = useRouter();
