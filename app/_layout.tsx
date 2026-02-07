@@ -11,6 +11,13 @@ export default function RootLayout() {
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="(tabs)" />
           <Stack.Screen
+            name="post-details"
+            options={{
+              presentation: 'card',
+              gestureEnabled: true,
+            }}
+          />
+          <Stack.Screen
             name="profile"
             options={{
               presentation: 'modal',
