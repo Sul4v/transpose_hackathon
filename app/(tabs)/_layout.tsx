@@ -1,7 +1,28 @@
 import { Ionicons } from '@expo/vector-icons';
-import { Tabs } from 'expo-router';
+import { Tabs, useRouter } from 'expo-router';
 import React from 'react';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { colors } from '../../src/styles/colors';
+
+function ProfileHeaderButton() {
+    const router = useRouter();
+    return (
+        <TouchableOpacity
+            style={styles.profileButton}
+            onPress={() => router.push('/profile' as any)}
+        >
+            <Ionicons name="person-circle-outline" size={28} color={colors.textPrimary} />
+        </TouchableOpacity>
+    );
+}
+
+const styles = StyleSheet.create({
+    profileButton: {
+        marginRight: 16,
+        padding: 4,
+    },
+});
+
 
 export default function TabLayout() {
     return (
@@ -39,6 +60,7 @@ export default function TabLayout() {
                     tabBarIcon: ({ focused, color, size }) => (
                         <Ionicons name={focused ? 'home' : 'home-outline'} size={size} color={color} />
                     ),
+                    headerRight: () => <ProfileHeaderButton />,
                 }}
             />
             <Tabs.Screen

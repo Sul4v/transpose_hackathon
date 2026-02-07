@@ -10,6 +10,16 @@ export default function RootLayout() {
       <ToastProvider>
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="(tabs)" />
+          <Stack.Screen
+            name="profile"
+            options={{
+              presentation: 'modal',
+              headerShown: true,
+              headerTitle: 'Profile',
+              gestureEnabled: true,
+              gestureDirection: 'vertical',
+            }}
+          />
         </Stack>
         <StatusBar style="dark" />
       </ToastProvider>
