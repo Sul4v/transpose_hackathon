@@ -113,35 +113,33 @@ export default function PostDetailsScreen() {
                 />
 
                 {/* Commenters Section */}
-                <TouchableOpacity
-                    style={styles.commentersHeader}
-                    onPress={() => setShowCommenters(!showCommenters)}
-                    activeOpacity={0.7}
-                >
-                    <View style={styles.commentersHeaderLeft}>
-                        <Ionicons name="chatbubbles" size={20} color={colors.primary} />
+                <View style={styles.commentersSection}>
+                    <TouchableOpacity
+                        style={styles.commentersHeader}
+                        onPress={() => setShowCommenters(!showCommenters)}
+                        activeOpacity={0.7}
+                    >
                         <Text style={styles.commentersTitle}>
-                            Commenters Attending ({COMMENTERS.length})
+                            Possible Attendees · {COMMENTERS.length}
                         </Text>
-                    </View>
-                    <Ionicons
-                        name={showCommenters ? 'chevron-up' : 'chevron-down'}
-                        size={20}
-                        color={colors.textSecondary}
-                    />
-                </TouchableOpacity>
+                        <Ionicons
+                            name={showCommenters ? 'chevron-up' : 'chevron-down'}
+                            size={18}
+                            color={colors.textMuted}
+                        />
+                    </TouchableOpacity>
 
-                {showCommenters && (
-                    <View style={styles.commentersList}>
-                        {COMMENTERS.map((attendee) => (
-                            <AttendeeCard
-                                key={attendee.id}
-                                attendee={attendee}
-                                onContact={handleContactAttendee}
-                            />
-                        ))}
-                    </View>
-                )}
+                    {showCommenters && (
+                        <View style={styles.commentersList}>
+                            {COMMENTERS.map((attendee) => (
+                                <AttendeeCard
+                                    key={attendee.id}
+                                    attendee={attendee}
+                                />
+                            ))}
+                        </View>
+                    )}
+                </View>
             </ScrollView>
         </View>
     );
@@ -178,28 +176,24 @@ const styles = StyleSheet.create({
     scrollContent: {
         paddingBottom: 40,
     },
+    commentersSection: {
+        marginTop: 24,
+        paddingHorizontal: 16,
+    },
     commentersHeader: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: colors.surface,
-        marginHorizontal: 16,
-        marginTop: 16,
-        padding: 16,
-        borderRadius: 12,
-    },
-    commentersHeaderLeft: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 10,
+        paddingBottom: 8,
+        borderBottomWidth: 1,
+        borderBottomColor: colors.surface,
     },
     commentersTitle: {
-        fontSize: 16,
+        fontSize: 15,
         fontWeight: '600',
         color: colors.textPrimary,
     },
     commentersList: {
-        paddingHorizontal: 16,
-        paddingTop: 12,
+        paddingTop: 4,
     },
 });

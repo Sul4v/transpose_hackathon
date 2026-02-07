@@ -183,6 +183,11 @@ export function FeedPostCard({
                 <ImageCarousel images={post.images} />
             )}
 
+            {/* Bold Headline - YC Founders are coming */}
+            {post.type === 'image' && (
+                <Text style={styles.headlineText}>🚀 YC Founders are coming</Text>
+            )}
+
             {/* Text Content */}
             {post.type === 'text' && (
                 <View style={[styles.captionContainer, styles.textPostContent]}>
@@ -235,20 +240,7 @@ export function FeedPostCard({
                 </View>
             )}
 
-            {/* Actions row (shown in feed and details) */}
-            <View style={[styles.actionsContainer, detailsMode && styles.actionsContainerDetails]}>
-                <TouchableOpacity
-                    style={styles.contactButton}
-                    onPress={(event) => {
-                        event.stopPropagation();
-                        // TODO: Implement contact functionality
-                    }}
-                    activeOpacity={0.7}
-                >
-                    <Ionicons name="mail-outline" size={18} color={colors.textPrimary} />
-                    <Text style={styles.contactButtonText}>Contact</Text>
-                </TouchableOpacity>
-            </View>
+
 
             {/* Caption (Only for Image Posts - rendered BELOW actions) */}
             {
@@ -411,6 +403,14 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         color: colors.textSecondary,
         marginTop: 2,
+    },
+    headlineText: {
+        fontSize: 16,
+        fontWeight: '700',
+        color: colors.textPrimary,
+        paddingHorizontal: 0,
+        paddingTop: 12,
+        paddingBottom: 4,
     },
     hiddenText: {
         position: 'absolute',

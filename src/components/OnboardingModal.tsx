@@ -1,9 +1,6 @@
-import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import {
-    Dimensions,
     KeyboardAvoidingView,
-    Modal,
     Platform,
     ScrollView,
     StyleSheet,
@@ -19,26 +16,20 @@ interface OnboardingModalProps {
     onComplete: (data: { name: string; role: string; interests: string }) => void;
 }
 
-const { height: SCREEN_HEIGHT } = Dimensions.get('window');
-
 export function OnboardingModal({ visible, onComplete }: OnboardingModalProps) {
     const [name, setName] = useState('');
-    const [role, setRole] = useState('');
-    const [interests, setInterests] = useState('');
+    const [aboutMe, setAboutMe] = useState('');
+
+    if (!visible) return null;
 
     const handleSubmit = () => {
-        onComplete({ name, role, interests });
+        onComplete({ name, role: '', interests: aboutMe });
     };
 
     const isFormValid = name.trim().length > 0;
 
     return (
-        <Modal
-            visible={visible}
-            animationType="slide"
-            presentationStyle="pageSheet"
-            statusBarTranslucent
-        >
+        <View style={styles.overlay}>
             <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                 style={styles.container}
@@ -50,22 +41,19 @@ export function OnboardingModal({ visible, onComplete }: OnboardingModalProps) {
                 >
                     {/* Header */}
                     <View style={styles.header}>
-                        <View style={styles.logoContainer}>
-                            <Ionicons name="people" size={40} color={colors.primary} />
-                        </View>
-                        <Text style={styles.title}>Welcome to EventConnect</Text>
+                        <Text style={styles.title}>Tell us about yourself</Text>
                         <Text style={styles.subtitle}>
-                            Tell us about yourself so we can find the best events and people for you
+                            We'll find events that match your interests
                         </Text>
                     </View>
 
                     {/* Form */}
                     <View style={styles.form}>
                         <View style={styles.inputGroup}>
-                            <Text style={styles.label}>What's your name?</Text>
+                            <Text style={styles.label}>Name</Text>
                             <TextInput
                                 style={styles.input}
-                                placeholder="e.g., John Doe"
+                                placeholder="Your name"
                                 placeholderTextColor={colors.textMuted}
                                 value={name}
                                 onChangeText={setName}
@@ -74,26 +62,15 @@ export function OnboardingModal({ visible, onComplete }: OnboardingModalProps) {
                         </View>
 
                         <View style={styles.inputGroup}>
-                            <Text style={styles.label}>What do you do?</Text>
-                            <TextInput
-                                style={styles.input}
-                                placeholder="e.g., Software Engineer, Founder, Student"
-                                placeholderTextColor={colors.textMuted}
-                                value={role}
-                                onChangeText={setRole}
-                            />
-                        </View>
-
-                        <View style={styles.inputGroup}>
-                            <Text style={styles.label}>What are you interested in?</Text>
+                            <Text style={styles.label}>What are you into?</Text>
                             <TextInput
                                 style={[styles.input, styles.textArea]}
-                                placeholder="e.g., AI, Startups, Hackathons, Web3, Networking..."
+                                placeholder="Tell us what you like to do..."
                                 placeholderTextColor={colors.textMuted}
-                                value={interests}
-                                onChangeText={setInterests}
+                                value={aboutMe}
+                                onChangeText={setAboutMe}
                                 multiline
-                                numberOfLines={3}
+                                numberOfLines={4}
                                 textAlignVertical="top"
                             />
                         </View>
@@ -106,71 +83,58 @@ export function OnboardingModal({ visible, onComplete }: OnboardingModalProps) {
                         disabled={!isFormValid}
                         activeOpacity={0.8}
                     >
-                        <Text style={styles.submitButtonText}>Find Events For Me</Text>
-                        <Ionicons name="arrow-forward" size={20} color="#fff" />
+                        <Text style={styles.submitButtonText}>Continue</Text>
                     </TouchableOpacity>
-
-                    <Text style={styles.disclaimer}>
-                        We'll use this to match you with relevant events and attendees
-                    </Text>
                 </ScrollView>
             </KeyboardAvoidingView>
-        </Modal>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
+    overlay: {
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: colors.background,
+        zIndex: 100,
+    },
     container: {
         flex: 1,
-        backgroundColor: colors.background,
     },
     scrollContent: {
         flexGrow: 1,
         padding: 24,
-        paddingTop: 60,
+        paddingTop: 80,
+        justifyContent: 'center',
     },
     header: {
-        alignItems: 'center',
         marginBottom: 40,
-    },
-    logoContainer: {
-        width: 80,
-        height: 80,
-        borderRadius: 40,
-        backgroundColor: colors.surface,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom: 20,
     },
     title: {
         fontSize: 28,
         fontWeight: '700',
         color: colors.textPrimary,
-        marginBottom: 12,
-        textAlign: 'center',
+        marginBottom: 8,
     },
     subtitle: {
         fontSize: 16,
         color: colors.textSecondary,
-        textAlign: 'center',
         lineHeight: 24,
-        paddingHorizontal: 20,
     },
     form: {
         marginBottom: 32,
     },
     inputGroup: {
-        marginBottom: 24,
+        marginBottom: 20,
     },
     label: {
-        fontSize: 16,
-        fontWeight: '600',
-        color: colors.textPrimary,
+        fontSize: 14,
+        fontWeight: '500',
+        color: colors.textSecondary,
         marginBottom: 8,
     },
     input: {
-        backgroundColor: colors.surface,
-        borderRadius: 12,
+        backgroundColor: colors.background,
+        borderRadius: 8,
         padding: 16,
         fontSize: 16,
         color: colors.textPrimary,
@@ -182,27 +146,17 @@ const styles = StyleSheet.create({
         paddingTop: 16,
     },
     submitButton: {
-        backgroundColor: colors.primary,
-        borderRadius: 30,
+        backgroundColor: colors.textPrimary,
+        borderRadius: 999,
         paddingVertical: 16,
-        paddingHorizontal: 32,
-        flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center',
-        gap: 8,
-        marginBottom: 16,
     },
     submitButtonDisabled: {
-        opacity: 0.5,
+        opacity: 0.3,
     },
     submitButtonText: {
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: '600',
         color: '#fff',
-    },
-    disclaimer: {
-        fontSize: 13,
-        color: colors.textMuted,
-        textAlign: 'center',
     },
 });
