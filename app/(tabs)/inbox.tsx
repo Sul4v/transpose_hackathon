@@ -2,12 +2,12 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { colors } from '../../src/styles/colors';
 
-export default function ExploreScreen() {
+export default function InboxScreen() {
     return (
         <View style={styles.container}>
             <View style={styles.content}>
-                <Text style={styles.title}>Explore</Text>
-                <Text style={styles.subtitle}>Discover content</Text>
+                <Text style={styles.title}>Inbox</Text>
+                <Text style={styles.subtitle}>Notifications</Text>
             </View>
         </View>
     );
