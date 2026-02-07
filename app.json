@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "transpose-hackathon",
-    "slug": "transpose-hackathon",
+    "name": "radarr",
+    "slug": "radarr",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",

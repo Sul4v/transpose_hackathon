@@ -55,7 +55,7 @@ export default function TabLayout() {
             <Tabs.Screen
                 name="index"
                 options={{
-                    title: 'Orecce',
+                    title: 'Radarr',
                     tabBarLabel: 'Home',
                     tabBarIcon: ({ focused, color, size }) => (
                         <Ionicons name={focused ? 'home' : 'home-outline'} size={size} color={color} />
